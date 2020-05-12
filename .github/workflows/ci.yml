@@ -77,7 +77,7 @@ jobs:
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
         with:
           suite: ${{ matrix.suite }}
-          os: ${{ matrix.os }
+          os: ${{ matrix.os }}
 
   final:
     needs: [dokken]
