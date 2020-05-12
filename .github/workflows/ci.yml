@@ -19,13 +19,13 @@ jobs:
         env:
           CHEF_LICENSE: accept-no-persist
 
-  yamllint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@master
-      - name: Run yaml Lint
-        uses: actionshub/yamllint@master
+  # yamllint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@master
+  #     - name: Run yaml Lint
+  #       uses: actionshub/yamllint@master
 
   mdl:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
         uses: actionshub/markdownlint@master
 
   dokken:
-    needs: [mdl, yamllint, delivery]
+    needs: [mdl, delivery] # Add back yamllint
     runs-on: ubuntu-latest
     strategy:
       matrix:
