@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: default
 #
 # Author: Ray Rodriguez <rayrod2030@gmail.com>

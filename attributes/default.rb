@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Attributes:: default
 #
 
@@ -19,9 +19,9 @@ default['prometheus']['install_method']                                         
 # rubocop:disable Style/ConditionalAssignment
 case node['platform_family']
 when 'debian'
-  if node['platform'] == 'ubuntu' && node['platform_version'].to_f < 15.04
+  if platform?('ubuntu') && node['platform_version'].to_f < 15.04
     default['prometheus']['init_style'] = 'upstart'
-  elsif node['platform'] == 'debian' && node['platform_version'].to_f < 8.0
+  elsif platform?('debian') && node['platform_version'].to_f < 8.0
     default['prometheus']['init_style'] = 'runit'
   else
     default['prometheus']['init_style'] = 'systemd'
