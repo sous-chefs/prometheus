@@ -77,46 +77,10 @@ jobs:
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
         with:
           suite: ${{ matrix.suite }}
-          os: ${{ matrix.os }}
-
-  macos:
-    needs: [mdl, yamllint, delivery]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@master
-      - name: Install Chef
-        uses: actionshub/chef-install@master
-      - name: Kitchen Converge
-        uses: actionshub/test-kitchen@master
-        env:
-          CHEF_LICENSE: accept-no-persist
-          KITCHEN_LOCAL_YAML: kitchen.macos.yml
-          TERM: xterm-256color
-        with:
-          suite: adoptopenjdk-14
-          os: macos
-          action: converge
-      - name: Source Profile for JAVA_HOME
-        run: |
-          source /etc/profile
-          echo "sourced profile for JAVA_HOME"
-          echo "New JAVA home after Chef run is: ${JAVA_HOME}"
-          # Magic line for github actions to persist the change
-          echo ::set-env name=JAVA_HOME::$(echo ${JAVA_HOME})
-      - name: Kitchen Verify
-        uses: actionshub/test-kitchen@master
-        env:
-          CHEF_LICENSE: accept-no-persist
-          KITCHEN_LOCAL_YAML: kitchen.macos.yml
-          TERM: xterm-256color
-        with:
-          suite: adoptopenjdk-14
-          os: macos
-          action: verify
+          os: ${{ matrix.os }
 
   final:
-    needs: [dokken, macos]
+    needs: [dokken]
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
