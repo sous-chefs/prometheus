@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: default
 #
 # Author: Ray Rodriguez <rayrod2030@gmail.com>
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'build-essential::default'
+build_essential 'install compilation tools'
 include_recipe 'golang::default'
 
 # These packages are needed go build

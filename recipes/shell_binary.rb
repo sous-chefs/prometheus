@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: shell_binary
 #
 # Author: Rohit Gupta - @rohit01

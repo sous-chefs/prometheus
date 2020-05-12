@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: binary
 #
 # Author: Kristian Jarvenpaa <kristian.jarvenpaa@gmail.com>

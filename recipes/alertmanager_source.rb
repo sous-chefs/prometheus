@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: alertmanager_source
 #
 # Author: Javier Zunzunegui <javier.zunzunegui.b@gmail.com>

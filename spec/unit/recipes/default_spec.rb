@@ -62,7 +62,7 @@ describe 'prometheus::default' do
     end
 
     it 'includes build-essential' do
-      expect(chef_run).to include_recipe('build-essential::default')
+      expect(chef_run).to build_essential 'install compilation tools'
     end
 
     %w(curl git-core mercurial gzip sed).each do |pkg|
@@ -179,7 +179,7 @@ describe 'prometheus::default' do
     end
 
     it 'runs ark with given file_extension' do
-      chef_run.node.set['prometheus']['file_extension'] = 'tar.gz'
+      chef_run.node.normal['prometheus']['file_extension'] = 'tar.gz'
       chef_run.converge(described_recipe)
       expect(chef_run).to put_ark('prometheus').with(
         extension: 'tar.gz'
