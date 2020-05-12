@@ -1,10 +1,12 @@
-prometheus Cookbook Issues
+# prometheus Cookbook Issues
+
 ============================
 This file documents the steps necessary to report any issue with the
 prometheus cookbook. Following these guidelines will help ensure your
 issue is resolved in a timely manner.
 
 Reporting
+
 ---------
 When you report an issue, please include the following information:
 

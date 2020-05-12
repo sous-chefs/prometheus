@@ -1,5 +1,6 @@
 Contributing to the prometheus Cookbook
 =========================================
+
 The prometheus cookbook uses [Github][] to triage, manage,
 and track issues and changes to the cookbook.
 
@@ -10,6 +11,7 @@ following guidelines in mind:
 - [Testing](#testing)
 
 Coding Standards
+
 ----------------
 The submitted code should be compatible with the standard Ruby coding guidelines.
 Here are some additional resources:
@@ -21,7 +23,9 @@ This cookbook is equipped with Rubocop, which will fail the build for violating
 these standards.
 
 Testing
--------
+
+----------------
+
 Whether your pull request is a bug fix or introduces new classes or methods to
 the project, we kindly ask that you include tests for your changes. Even if it's
 just a small improvement, a test is necessary to ensure the bug is never
@@ -34,20 +38,22 @@ and [Test Kitchen](https://github.com/test-kitchen/test-kitchen) with
 [Serverspec](https://github.com/serverspec/serverspec) bussers.
 
 Process
--------
+
+----------------
+
 1. Clone the git repository from GitHub:
 
-        $ git clone git@github.com:rayrod2030/chef-prometheus.git
+        git clone git@github.com:rayrod2030/chef-prometheus.git
 
 2. Make sure you have a sane [ChefDK][] development environment:
 
-        $ chef version
+        chef version
 
 3. Make any changes
 4. Write tests to support those changes.
 5. Run the tests:
 
-        $ kitchen verify
+        kitchen verify
 
 6. Assuming the tests pass, commit your changes
 
