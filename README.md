@@ -1,54 +1,56 @@
-prometheus Cookbook
-=====================
+# prometheus Cookbook
+
 [![Cookbook](http://img.shields.io/cookbook/v/prometheus.svg)](https://github.com/rayrod2030/chef-prometheus)
 [![Build Status](https://travis-ci.org/elijah/chef-prometheus.svg?branch=master)](https://travis-ci.org/rayrod2030/chef-prometheus?branch=master)
 [![Gitter chat](https://img.shields.io/badge/Gitter-rayrod2030%2Fchef--prometheus-brightgreen.svg)](https://gitter.im/rayrod2030/chef-prometheus)
 
 This cookbook installs the [Prometheus][] monitoring system and time-series database.
 
-Requirements
-------------
+## Requirements
+
 - Chef 12 or higher
 - Ruby 2.2 or higher
 
-Platform
---------
+### Platform
+
 Tested on
 
-* Ubuntu 14.04
-* Ubuntu 12.04
-* Debian 7.7
-* Centos 6.6
-* Centos 7.0
+- Ubuntu 14.04
+- Ubuntu 12.04
+- Debian 7.7
+- Centos 6.6
+- Centos 7.0
 
-Attributes
-----------
+## Attributes
+
 In order to keep the README managable and in sync with the attributes, this
 cookbook documents attributes inline. The usage instructions and default
 values for attributes can be found in the individual attribute files.
 
-Recipes
--------
+## Recipes
 
 ### default
+
 The `default` recipe installs creates all the default [Prometheus][] directories,
 config files and and users.  Default also calls the configured `install_method`
 recipe and finally calls the prometheus `service` recipe.
 
 ### source
+
 The `source` recipe builds Prometheus from a Github source tag.
 
 ### binary
+
 The `binary` recipe retrieves and installs a pre-compiled Prometheus build from
 a user-defined location.
 
 ### service
+
 The `service` recipe configures Prometheus to run under a process supervisor.
 Default supervisors are chosen based on distribution. Currently supported
 supervisors are init, runit, systemd, upstart and bluepill.
 
-Resource/Provider
------------------
+### Resource/Provider
 
 ### prometheus_job
 
@@ -65,26 +67,23 @@ end
 Note: This cookbook uses the accumulator pattern so you can define multiple
 prometheus_job’s and they will all be added to the Prometheus config.
 
-Externally managing `prometheus.conf`
--------------------------------------
+#### Externally managing `prometheus.conf`
 
 If you prefer to manage your `prometheus.conf` file externally using your own
 inventory or service discovery mechanism you can set
 `default['prometheus']['allow_external_config']` to `true`.
 
-Dependencies
-------------
+### Dependencies
 
 The following cookbooks are dependencies:
 
-* [build-essential][]
-* [apt][]
-* [yum][]
-* [runit][]
-* [bluepill][]
-* [accumulator][]
-* [ark][]
-
+- [build-essential][]
+- [apt][]
+- [yum][]
+- [runit][]
+- [bluepill][]
+- [accumulator][]
+- [ark][]
 
 ## Usage
 
@@ -124,23 +123,22 @@ client_servers = search(:node, "environment:#{node.chef_environment} AND tags:no
 
 # Assumes service_name is an attribute of each node
 client_servers.each do |server|
-	prometheus_job server.service_name do
-  	  scrape_interval   ‘15s’
-	  target            “#{server.fqdn}#{node[‘prometheus’][‘flags’][‘web.listen-address’]}"
-	  metrics_path       "#{node[‘prometheus’][‘flags’][‘web.telemetry-path’]}”
-	end
+  prometheus_job server.service_name do
+      scrape_interval   ‘15s’
+    target            “#{server.fqdn}#{node[‘prometheus’][‘flags’][‘web.listen-address’]}"
+    metrics_path       "#{node[‘prometheus’][‘flags’][‘web.telemetry-path’]}”
+  end
 end
 
 # Now run the default recipe that does all the work configuring and deploying prometheus
 include_recipe "prometheus::default"
 ```
 
-Development
------------
+### Development
+
 Please see the [Contributing](CONTRIBUTING.md) and [Issue Reporting](ISSUES.md) Guidelines.
 
-License & Authors
-------
+### License & Authors
 
 - Author: Ray Rodriguez <rayrod2030@gmail.com>
 - Author: kristian järvenpää <kristian.jarvenpaa@gmail.com>
@@ -163,7 +161,6 @@ limitations under the License.
 [apt]: https://github.com/opscode-cookbooks/apt
 [runit]: https://github.com/hw-cookbooks/runit
 [Prometheus]: https://github.com/prometheus/prometheus
-[bluepill]: https://github.com/opscode-cookbooks/bluepill
 [ark]: https://github.com/burtlo/ark
 [yum]: https://github.com/chef-cookbooks/yum
 [accumulator]: https://github.com/kisoku/chef-accumulator
