@@ -45,7 +45,7 @@ a user-defined location.
 ### service
 The `service` recipe configures Prometheus to run under a process supervisor.
 Default supervisors are chosen based on distribution. Currently supported
-supervisors are init, runit, systemd, upstart and bluepill.
+supervisors are init, runit, systemd, and upstart.
 
 Resource/Provider
 -----------------
@@ -81,7 +81,6 @@ The following cookbooks are dependencies:
 * [apt][]
 * [yum][]
 * [runit][]
-* [bluepill][]
 * [accumulator][]
 * [ark][]
 
@@ -163,7 +162,6 @@ limitations under the License.
 [apt]: https://github.com/opscode-cookbooks/apt
 [runit]: https://github.com/hw-cookbooks/runit
 [Prometheus]: https://github.com/prometheus/prometheus
-[bluepill]: https://github.com/opscode-cookbooks/bluepill
 [ark]: https://github.com/burtlo/ark
 [yum]: https://github.com/chef-cookbooks/yum
 [accumulator]: https://github.com/kisoku/chef-accumulator

@@ -17,6 +17,3 @@ depends 'yum'
 depends 'runit', '>= 1.5'
 depends 'ark'
 depends 'golang'
-
-# this should really be a suggests
-depends 'bluepill', '~> 2.3'
