@@ -58,7 +58,7 @@ template node['prometheus']['alertmanager']['config.file'] do
   variables(
     notification_config: node['prometheus']['alertmanager']['notification']
   )
-  notifies  :restart, 'service[alertmanager]'
+  notifies :restart, 'service[alertmanager]'
 end
 
 # -- Do the install -- #
