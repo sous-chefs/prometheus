@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: prometheus
+# Cookbook:: prometheus
 # Recipe:: service
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,17 +21,6 @@ when 'runit'
 
   runit_service 'prometheus' do
     default_logger true
-  end
-when 'bluepill'
-  include_recipe 'bluepill::default'
-
-  template "#{node['bluepill']['conf_dir']}/prometheus.pill" do
-    source 'prometheus.pill.erb'
-    mode '0644'
-  end
-
-  bluepill_service 'prometheus' do
-    action [:enable, :load]
   end
 when 'systemd'
   # rubocop:disable Style/HashSyntax

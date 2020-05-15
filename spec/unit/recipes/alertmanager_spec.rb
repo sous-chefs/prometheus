@@ -64,11 +64,11 @@ describe 'prometheus::alertmanager' do
     end
 
     it 'includes build-essential' do
-      expect(chef_run).to include_recipe('build-essential::default')
+      expect(chef_run).to build_essential 'install compilation tools'
     end
 
     %w(curl git-core mercurial gzip sed).each do |pkg|
-      it 'installs #{pkg}' do
+      it "installs #{pkg}" do
         expect(chef_run).to install_package(pkg)
       end
     end
@@ -102,22 +102,6 @@ describe 'prometheus::alertmanager' do
 
       it 'enables runit_service' do
         expect(chef_run).to enable_runit_service('alertmanager')
-      end
-    end
-
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/alertmanager.pill")
       end
     end
 
@@ -221,7 +205,7 @@ describe 'prometheus::alertmanager' do
     end
 
     it 'runs ark with given file_extension' do
-      chef_run.node.set['prometheus']['alertmanager']['file_extension'] = 'tar.gz'
+      chef_run.node.default['prometheus']['alertmanager']['file_extension'] = 'tar.gz'
       chef_run.converge(described_recipe)
       expect(chef_run).to put_ark('prometheus').with(
         extension: 'tar.gz'
@@ -242,23 +226,6 @@ describe 'prometheus::alertmanager' do
 
       it 'enables runit_service' do
         expect(chef_run).to enable_runit_service('alertmanager')
-      end
-    end
-
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/alertmanager.pill")
       end
     end
 
