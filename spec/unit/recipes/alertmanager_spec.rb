@@ -58,8 +58,8 @@ describe 'prometheus::alertmanager' do
   context 'source' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-        node.set['prometheus']['alertmanager']['version'] = '0.14.0'
-        node.set['prometheus']['alertmanager']['install_method'] = 'source'
+        node.normal['prometheus']['alertmanager']['version'] = '0.14.0'
+        node.normal['prometheus']['alertmanager']['install_method'] = 'source'
       end.converge(described_recipe)
     end
 
@@ -92,7 +92,7 @@ describe 'prometheus::alertmanager' do
     context 'runit' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'runit'
+          node.normal['prometheus']['init_style'] = 'runit'
         end.converge(described_recipe)
       end
 
@@ -105,26 +105,10 @@ describe 'prometheus::alertmanager' do
       end
     end
 
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/alertmanager.pill")
-      end
-    end
-
     context 'init' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'init'
+          node.normal['prometheus']['init_style'] = 'init'
         end.converge(described_recipe)
       end
 
@@ -138,13 +122,13 @@ describe 'prometheus::alertmanager' do
 
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'systemd'
-          node.set['prometheus']['user'] = 'prom_user'
-          node.set['prometheus']['group'] = 'prom_group'
-          node.set['prometheus']['alertmanager']['binary'] = '/tmp/alertmanager'
-          node.set['prometheus']['alertmanager']['storage.path'] = '/tmp/alertmanager_data'
-          node.set['prometheus']['alertmanager']['config.file'] = '/tmp/alertmanager.conf'
-          node.set['prometheus']['flags']['alertmanager.url'] = 'http://0.0.0.0:8080'
+          node.normal['prometheus']['init_style'] = 'systemd'
+          node.normal['prometheus']['user'] = 'prom_user'
+          node.normal['prometheus']['group'] = 'prom_group'
+          node.normal['prometheus']['alertmanager']['binary'] = '/tmp/alertmanager'
+          node.normal['prometheus']['alertmanager']['storage.path'] = '/tmp/alertmanager_data'
+          node.normal['prometheus']['alertmanager']['config.file'] = '/tmp/alertmanager.conf'
+          node.normal['prometheus']['flags']['alertmanager.url'] = 'http://0.0.0.0:8080'
         end.converge(described_recipe)
       end
 
@@ -169,14 +153,14 @@ describe 'prometheus::alertmanager' do
 
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'upstart'
-          node.set['prometheus']['user'] = 'prom_user'
-          node.set['prometheus']['group'] = 'prom_group'
-          node.set['prometheus']['alertmanager']['binary'] = '/tmp/alertmanager'
-          node.set['prometheus']['alertmanager']['storage.path'] = '/tmp/alertmanager_data'
-          node.set['prometheus']['alertmanager']['config.file'] = '/tmp/alertmanager.conf'
-          node.set['prometheus']['flags']['alertmanager.url'] = 'http://0.0.0.0:8080'
-          node.set['prometheus']['log_dir'] = '/tmp'
+          node.normal['prometheus']['init_style'] = 'upstart'
+          node.normal['prometheus']['user'] = 'prom_user'
+          node.normal['prometheus']['group'] = 'prom_group'
+          node.normal['prometheus']['alertmanager']['binary'] = '/tmp/alertmanager'
+          node.normal['prometheus']['alertmanager']['storage.path'] = '/tmp/alertmanager_data'
+          node.normal['prometheus']['alertmanager']['config.file'] = '/tmp/alertmanager.conf'
+          node.normal['prometheus']['flags']['alertmanager.url'] = 'http://0.0.0.0:8080'
+          node.normal['prometheus']['log_dir'] = '/tmp'
         end.converge(described_recipe)
       end
 
@@ -203,8 +187,8 @@ describe 'prometheus::alertmanager' do
   context 'binary' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-        node.set['prometheus']['alertmanager']['version'] = '0.14.0'
-        node.set['prometheus']['alertmanager']['install_method'] = 'binary'
+        node.normal['prometheus']['alertmanager']['version'] = '0.14.0'
+        node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
       end.converge(described_recipe)
     end
 
@@ -231,8 +215,8 @@ describe 'prometheus::alertmanager' do
     context 'runit' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'runit'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
+          node.normal['prometheus']['init_style'] = 'runit'
+          node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
       end
 
@@ -245,28 +229,11 @@ describe 'prometheus::alertmanager' do
       end
     end
 
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/alertmanager.pill")
-      end
-    end
-
     context 'init' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'init'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
+          node.normal['prometheus']['init_style'] = 'init'
+          node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
       end
 
@@ -278,8 +245,8 @@ describe 'prometheus::alertmanager' do
     context 'systemd' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'systemd'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
+          node.normal['prometheus']['init_style'] = 'systemd'
+          node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
       end
 
@@ -290,8 +257,8 @@ describe 'prometheus::alertmanager' do
     context 'upstart' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'upstart'
-          node.set['prometheus']['alertmanager']['install_method'] = 'binary'
+          node.normal['prometheus']['init_style'] = 'upstart'
+          node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
       end
 

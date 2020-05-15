@@ -48,7 +48,7 @@ a user-defined location.
 
 The `service` recipe configures Prometheus to run under a process supervisor.
 Default supervisors are chosen based on distribution. Currently supported
-supervisors are init, runit, systemd, upstart and bluepill.
+supervisors are init, runit, systemd, and upstart.
 
 ### Resource/Provider
 
@@ -81,7 +81,6 @@ The following cookbooks are dependencies:
 - [apt][]
 - [yum][]
 - [runit][]
-- [bluepill][]
 - [accumulator][]
 - [ark][]
 
@@ -114,7 +113,7 @@ your wrapper cookbooks.
 include_recipe "prometheus::use_lwrp"
 
 # Add a rule filename under `rule_files` in prometheus.yml.erb
-node.set['prometheus']['rule_filenames'] = ["#{node['prometheus']['dir']}/alert.rules"]
+node.normal['prometheus']['rule_filenames'] = ["#{node['prometheus']['dir']}/alert.rules"]
 
 # Example of using search to populate prometheus.yaml jobs using the prometheus_job LWRP
 # Finds all the instances that are in the current environment and are taged with "node_exporter"

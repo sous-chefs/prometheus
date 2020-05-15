@@ -58,7 +58,7 @@ template node['prometheus']['alertmanager']['config.file'] do
   variables(
     notification_config: node['prometheus']['alertmanager']['notification']
   )
-  notifies  :restart, 'service[alertmanager]'
+  notifies :restart, 'service[alertmanager]'
 end
 
 # -- Do the install -- #
@@ -71,17 +71,6 @@ when 'runit'
 
   runit_service 'alertmanager' do
     default_logger true
-  end
-when 'bluepill'
-  include_recipe 'bluepill::default'
-
-  template "#{node['bluepill']['conf_dir']}/alertmanager.pill" do
-    source 'alertmanager.pill.erb'
-    mode '0644'
-  end
-
-  bluepill_service 'alertmanager' do
-    action [:enable, :load]
   end
 when 'systemd'
   # rubocop:disable Style/HashSyntax
