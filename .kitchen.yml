@@ -57,19 +57,3 @@ suites:
     attributes:
       prometheus:
         init_style: 'init'
-
-#  - name: bluepill
-#    run_list:
-#        - recipe[prometheus::default]
-#    attributes:
-#      prometheus:
-#        init_style: 'bluepill'
-
-#  - name: bluepill-binary
-#    run_list:
-#        - recipe[prometheus::default]
-#    attributes:
-#      prometheus:
-#        init_style: 'bluepill'
-#        install_method: 'binary'
-

@@ -103,22 +103,6 @@ describe 'prometheus::default' do
       end
     end
 
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/prometheus.pill")
-      end
-    end
-
     context 'init' do
       let(:chef_run) do
         ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
@@ -200,23 +184,6 @@ describe 'prometheus::default' do
 
       it 'enables runit_service' do
         expect(chef_run).to enable_runit_service('prometheus')
-      end
-    end
-
-    context 'bluepill' do
-      let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
-          node.set['prometheus']['init_style'] = 'bluepill'
-          node.set['prometheus']['install_method'] = 'binary'
-        end.converge(described_recipe)
-      end
-
-      it 'includes bluepill::default recipe' do
-        expect(chef_run).to include_recipe('bluepill::default')
-      end
-
-      it 'renders a bluepill configuration file' do
-        expect(chef_run).to render_file("#{chef_run.node['bluepill']['conf_dir']}/prometheus.pill")
       end
     end
 
