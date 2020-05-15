@@ -114,7 +114,7 @@ your wrapper cookbooks.
 include_recipe "prometheus::use_lwrp"
 
 # Add a rule filename under `rule_files` in prometheus.yml.erb
-node.set['prometheus']['rule_filenames'] = ["#{node['prometheus']['dir']}/alert.rules"]
+node.normal['prometheus']['rule_filenames'] = ["#{node['prometheus']['dir']}/alert.rules"]
 
 # Example of using search to populate prometheus.yaml jobs using the prometheus_job LWRP
 # Finds all the instances that are in the current environment and are taged with "node_exporter"
