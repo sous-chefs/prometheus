@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- resolved cookstyle error: Thorfile:1:1 convention: `Style/Encoding`
+- resolved cookstyle error: test/shared/spec_helper.rb:6:10 convention: `Style/ExpandPathArguments`
+
 ## [Unreleased][unreleased]
 ### Changed
 - Updated attributes and templates for Prometheus 0.15 release.

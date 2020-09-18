@@ -3,7 +3,7 @@ require 'serverspec'
 # Required by serverspec
 set :backend, :exec
 
-Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |file| require_relative(file) }
+Dir[File.expand_path('support/**/*.rb', __dir__)].each { |file| require_relative(file) }
 
 RSpec.configure do |config|
   config.before(:all) do
