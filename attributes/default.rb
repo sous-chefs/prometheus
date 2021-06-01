@@ -88,7 +88,7 @@ default['prometheus']['job_config_cookbook_name']                               
 # Prometheus configuration file name.
 
 default['prometheus']['v2_cli_flags']                                                     = [
-  'web.enable-lifecycle'
+  'web.enable-lifecycle',
 ]
 
 default['prometheus']['flags']['config.file']                                             = "#{node['prometheus']['dir']}/prometheus.yml"
@@ -163,7 +163,7 @@ default['prometheus']['flags']['storage.local.pedantic-checks']                 
 
 # How long to retain samples in the local storage.
 default['prometheus']['flags']['storage.local.retention']                                 = '360h0m0s'
-default['prometheus']['v2_cli_opts']['storage.tsdb.retention']                            = '15d'
+default['prometheus']['v2_cli_opts']['storage.tsdb.retention.time']                       = '15d'
 
 # When to sync series files after modification. Possible values:
 # 'never', 'always', 'adaptive'. Sync'ing slows down storage performance
