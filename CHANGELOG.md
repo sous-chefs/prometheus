@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
 ## 0.7.1 - *2021-06-01*
 
 - resolved cookstyle error: Thorfile:1:1 convention: `Style/Encoding`
