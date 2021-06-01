@@ -2,12 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.7.1 - *2021-06-01*
 
 - resolved cookstyle error: Thorfile:1:1 convention: `Style/Encoding`
 - resolved cookstyle error: test/shared/spec_helper.rb:6:10 convention: `Style/ExpandPathArguments`
 
-## [Unreleased][unreleased]
+## [0.7.1 - *2021-06-01*][0.7.1 - *2021-06-01*]
 
 ### Changed
 
@@ -67,7 +67,7 @@ Changed
 
 - Initial release of prometheus cookbook
 
-[unreleased]: https://github.com/rayrod2030/chef-prometheus/compare/0.5.1...HEAD
+[0.7.1 - *2021-06-01*]: https://github.com/rayrod2030/chef-prometheus/compare/0.5.1...HEAD
 [0.5.1]: https://github.com/rayrod2030/chef-prometheus/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/rayrod2030/chef-prometheus/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/rayrod2030/chef-prometheus/compare/0.3.0...0.4.0
