@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 0.7.1 - *2021-06-01*
 
 - resolved cookstyle error: Thorfile:1:1 convention: `Style/Encoding`
