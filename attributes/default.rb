@@ -65,7 +65,7 @@ default['prometheus']['binary_url']                                             
 
 # Checksum for pre-compiled binary
 # Default for testing purposes
-default['prometheus']['checksum']                                                         = 'caddbbbe3ef8545c6cefb32f9a11207ae18dcc788e8d0fb19659d88c58d14b37'
+default['prometheus']['checksum']                                                         = 'ec1798dbda1636f49d709c3931078dc17eafef76c480b67751aa09828396cf31'
 
 # If file extension of your binary can not be determined by the URL
 # then define it here. Example 'tar.bz2'
