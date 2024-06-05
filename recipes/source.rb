@@ -20,10 +20,12 @@
 build_essential 'install compilation tools'
 include_recipe 'golang::default'
 
+# rubocop:disable Style/PercentLiteralDelimiters
 # These packages are needed go build
 %w(curl git-core mercurial gzip sed).each do |pkg|
   package pkg
 end
+# rubocop:enable Style/PercentLiteralDelimiters
 
 git "#{Chef::Config[:file_cache_path]}/prometheus-#{node['prometheus']['version']}" do
   repository node['prometheus']['source']['git_repository']
@@ -33,7 +35,8 @@ end
 
 bash 'compile_prometheus_source' do
   cwd "#{Chef::Config[:file_cache_path]}/prometheus-#{node['prometheus']['version']}"
-  environment 'PATH' => "/usr/local/go/bin:#{ENV['PATH']}", 'GOPATH' => "/opt/go:#{node['go']['gopath']}:/opt/go/src/github.com/prometheus/promu/vendor"
+  environment 'PATH' => "/usr/local/go/bin:#{ENV['PATH']}",
+              'GOPATH' => "/opt/go:#{node['go']['gopath']}:/opt/go/src/github.com/prometheus/promu/vendor"
   code <<-EOH
     make build &&
     mv prometheus #{node['prometheus']['dir']} &&
