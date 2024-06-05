@@ -1,11 +1,11 @@
 name             'prometheus'
-maintainer       'Elijah Wright'
-maintainer_email 'elijah.wright@gmail.com'
+maintainer       'Sous Chefs'
+maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
 description      'Installs/Configures Prometheus'
 version          '0.7.4'
-source_url 'https://github.com/elijah/chef-prometheus'
-issues_url 'https://github.com/elijah/chef-prometheus/issues'
+source_url 'https://github.com/sous-chefs/prometheus'
+issues_url 'https://github.com/sous-chefs/prometheus/issues'
 chef_version     '>= 14.0'
 
 %w(ubuntu debian centos redhat fedora).each do |os|
