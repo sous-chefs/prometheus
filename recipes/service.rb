@@ -23,17 +23,18 @@ when 'runit'
     default_logger true
   end
 when 'systemd'
-  # rubocop:disable Style/HashSyntax
+  # rubocop:disable Style/PercentLiteralDelimiters
   dist_dir, conf_dir, env_file = value_for_platform_family(
     ['fedora'] => %w(fedora sysconfig prometheus),
     ['rhel'] => %w(redhat sysconfig prometheus),
     ['debian'] => %w(debian default prometheus)
   )
+  # rubocop:enable Style/PercentLiteralDelimiters
 
   template '/etc/systemd/system/prometheus.service' do
     source 'systemd/prometheus.service.erb'
     mode '0644'
-    variables(:sysconfig_file => "/etc/#{conf_dir}/#{env_file}")
+    variables(sysconfig_file: "/etc/#{conf_dir}/#{env_file}")
     notifies :restart, 'service[prometheus]', :delayed
   end
 
@@ -43,11 +44,13 @@ when 'systemd'
     notifies :restart, 'service[prometheus]', :delayed
   end
 
+  # rubocop:disable Style/PercentLiteralDelimiters
   service 'prometheus' do
-    supports :status => true, :restart => true
-    action [:enable, :start]
+    supports status: true, restart: true
+    action %i(enable start)
   end
-  # rubocop:enable Style/HashSyntax
+  # rubocop:enable Style/PercentLiteralDelimiters
+
 when 'upstart'
   template '/etc/init/prometheus.conf' do
     source 'upstart/prometheus.service.erb'
@@ -55,22 +58,26 @@ when 'upstart'
     notifies :restart, 'service[prometheus]', :delayed
   end
 
+  # rubocop:disable Style/PercentLiteralDelimiters
   service 'prometheus' do
     provider Chef::Provider::Service::Upstart
-    action [:enable, :start]
+    action %i(enable start)
   end
+  # rubocop:enable Style/PercentLiteralDelimiters
 else
+
   template '/etc/init.d/prometheus' do
     source 'prometheus.erb'
     owner 'root'
     group node['root_group']
     mode '0755'
-    notifies :restart, 'service[prometheus]', :delayed
   end
-end
 
-# rubocop:disable Style/HashSyntax
-service 'prometheus' do
-  supports :status => true, :restart => true, :reload => true
+  # rubocop:disable Style/PercentLiteralDelimiters
+  service 'prometheus' do
+    supports status: true, restart: true, reload: true
+    action %i(enable start)
+  end
+  # rubocop:enable Style/PercentLiteralDelimiters
+
 end
-# rubocop:enable Style/HashSyntax
