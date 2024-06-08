@@ -63,7 +63,6 @@ suites:
 
   - name: alertmanager
     run_list:
-      - recipe[prometheus::default]
       - recipe[prometheus::alertmanager]
     attributes:
       prometheus:
