@@ -5,30 +5,31 @@ provisioner:
   name: chef_zero
   data_path: test/shared
 
+verifier:
+  name: inspec
+
 platforms:
-  - name: ubuntu-14.04
-  - name: ubuntu-16.04
-  - name: debian-7.11
-    driver:
-      cache_directory: false
-  - name: debian-8.7
-  - name: centos-6.9
+  - name: debian-9
+  - name: debian-10
+  - name: centos-7
     run_list:
       - recipe[yum::default]
-  - name: centos-7.3
+  - name: centos-8
     run_list:
       - recipe[yum::default]
+  - name: ubuntu-1804
+  - name: ubuntu-2004
+  - name: amazon-linux
+  - name: amazonlinux
+  - name: amazonlinux-2
 
 suites:
-  - name: default
+  - name: default-binary
     run_list:
       - recipe[prometheus::default]
-      - recipe[prometheus::alertmanager]
     attributes:
       prometheus:
         install_method: 'binary'
-        alertmanager:
-          install_method: 'binary'
 
   - name: init-binary
     run_list:
@@ -44,11 +45,13 @@ suites:
     run_list:
       - recipe[prometheus::default]
     attributes:
+      prometheus:
+        install_method: 'source'
       go:
         gobin: '/usr/local/go/bin'
         gopath: '/usr/local/go'
 
-  - name: init
+  - name: init-source
     run_list:
       - recipe[prometheus::default]
     provisioner:
@@ -57,3 +60,13 @@ suites:
     attributes:
       prometheus:
         init_style: 'init'
+
+  - name: alertmanager
+    run_list:
+      - recipe[prometheus::default]
+      - recipe[prometheus::alertmanager]
+    attributes:
+      prometheus:
+        install_method: 'binary'
+        alertmanager:
+          install_method: 'binary'

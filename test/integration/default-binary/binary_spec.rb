@@ -1,4 +1,4 @@
-require_relative '../../../kitchen/data/spec_helper'
+require_relative '../../shared/spec_helper'
 
 describe 'prometheus service' do
   describe service('prometheus') do
