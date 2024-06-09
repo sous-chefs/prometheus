@@ -77,7 +77,8 @@ when 'systemd'
   dist_dir, conf_dir, env_file = value_for_platform_family(
     ['fedora'] => %w(fedora sysconfig alertmanager),
     ['rhel'] => %w(redhat sysconfig alertmanager),
-    ['debian'] => %w(debian default alertmanager)
+    ['debian'] => %w(debian default alertmanager),
+    ['amazon'] => %w(amazon default alertmanager)
   )
 
   template '/etc/systemd/system/alertmanager.service' do
@@ -95,7 +96,7 @@ when 'systemd'
 
   service 'alertmanager' do
     supports :status => true, :restart => true
-    action [:enable, :start]
+    action %i(enable start)
   end
   # rubocop:enable Style/HashSyntax
 when 'upstart'
@@ -107,7 +108,7 @@ when 'upstart'
 
   service 'alertmanager' do
     provider Chef::Provider::Service::Upstart
-    action [:enable, :start]
+    action %i(enable start)
   end
 else
   template '/etc/init.d/alertmanager' do
@@ -126,5 +127,5 @@ end
 # rubocop:enable Style/HashSyntax
 
 service 'alertmanager' do
-  action [:enable, :start]
+  action %i(enable start)
 end

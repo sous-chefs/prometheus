@@ -19,7 +19,11 @@
 
 include_recipe 'ark::default'
 
-%w(curl tar bzip2).each do |pkg|
+packages = %w(tar bzip2)
+
+packages.push('curl') unless platform?('amazon')
+
+packages.each do |pkg|
   package pkg
 end
 
@@ -34,6 +38,8 @@ ark dir_name do
   path dir_path
   owner node['prometheus']['user']
   group node['prometheus']['group']
-  extension node['prometheus']['alertmanager']['file_extension'] unless node['prometheus']['alertmanager']['file_extension'].empty?
+  unless node['prometheus']['alertmanager']['file_extension'].empty?
+    extension node['prometheus']['alertmanager']['file_extension']
+  end
   action :put
 end

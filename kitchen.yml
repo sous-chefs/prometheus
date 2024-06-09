@@ -1,0 +1,71 @@
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  data_path: test/shared
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: debian-9
+  - name: debian-10
+  - name: centos-7
+    run_list:
+      - recipe[yum::default]
+  - name: centos-8
+    run_list:
+      - recipe[yum::default]
+  - name: ubuntu-1804
+  - name: ubuntu-2004
+  - name: amazon-linux
+  - name: amazonlinux
+  - name: amazonlinux-2
+
+suites:
+  - name: default-binary
+    run_list:
+      - recipe[prometheus::default]
+    attributes:
+      prometheus:
+        install_method: 'binary'
+
+  - name: init-binary
+    run_list:
+      - recipe[prometheus::default]
+    attributes:
+      prometheus:
+        init_style: 'init'
+        install_method: 'binary'
+        flags:
+          storage.remote.timeout: 45s
+
+  - name: default-source
+    run_list:
+      - recipe[prometheus::default]
+    attributes:
+      prometheus:
+        install_method: 'source'
+      go:
+        gobin: '/usr/local/go/bin'
+        gopath: '/usr/local/go'
+
+  - name: init-source
+    run_list:
+      - recipe[prometheus::default]
+    provisioner:
+      name: chef_zero
+      require_chef_omnibus: 11.12.4
+    attributes:
+      prometheus:
+        init_style: 'init'
+
+  - name: alertmanager
+    run_list:
+      - recipe[prometheus::alertmanager]
+    attributes:
+      prometheus:
+        install_method: 'binary'
+        alertmanager:
+          install_method: 'binary'

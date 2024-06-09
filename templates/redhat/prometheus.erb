@@ -107,9 +107,13 @@ force_stop() {
   fi
 }
 
+reload() {
+  echo "Reloading Prometheus configuration"
+  kill -HUP $(cat "$pidfile")
+}
 
 case "$1" in
-  force-start|start|stop|force-stop|restart)
+  force-start|start|stop|force-stop|restart|reload)
     trace "Attempting '$1' on prometheus"
     ;;
 esac
@@ -143,11 +147,13 @@ case "$1" in
     exit $code
     ;;
   restart)
-
     stop && start
     ;;
+  reload)
+    reload
+    ;;
   *)
-    echo "Usage: $SCRIPTNAME {start|stop|force-start|force-stop|status|restart}" >&2
+    echo "Usage: $SCRIPTNAME {start|stop|force-start|force-stop|status|restart|reload}" >&2
     exit 3
   ;;
 esac

@@ -45,6 +45,7 @@ directory node['prometheus']['flags']['storage.local.path'] do
 end
 
 apt_update 'please'
+
 # Ensure that any unpacking of prometheus doesn't blow away our own configuration
 include_recipe "prometheus::#{node['prometheus']['install_method']}"
 

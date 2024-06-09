@@ -32,6 +32,8 @@ when 'rhel', 'fedora'
   else
     default['prometheus']['init_style']                                                   = 'init'
   end
+when 'amazon'
+  default['prometheus']['init_style'] = 'systemd'
 else
   default['prometheus']['init_style'] = 'init'
 end
@@ -65,7 +67,7 @@ default['prometheus']['binary_url']                                             
 
 # Checksum for pre-compiled binary
 # Default for testing purposes
-default['prometheus']['checksum']                                                         = 'caddbbbe3ef8545c6cefb32f9a11207ae18dcc788e8d0fb19659d88c58d14b37'
+default['prometheus']['checksum']                                                         = 'ec1798dbda1636f49d709c3931078dc17eafef76c480b67751aa09828396cf31'
 
 # If file extension of your binary can not be determined by the URL
 # then define it here. Example 'tar.bz2'
@@ -138,21 +140,21 @@ default['prometheus']['flags']['storage.local.checkpoint-interval']             
 default['prometheus']['flags']['storage.local.dirty']                                     = false
 
 # The size in bytes for the fingerprint to metric index cache.
-default['prometheus']['flags']['storage.local.index-cache-size.fingerprint-to-metric']    = 10485760
+default['prometheus']['flags']['storage.local.index-cache-size.fingerprint-to-metric']    = 10_485_760
 
 # The size in bytes for the metric time range index cache.
-default['prometheus']['flags']['storage.local.index-cache-size.fingerprint-to-timerange'] = 5242880
+default['prometheus']['flags']['storage.local.index-cache-size.fingerprint-to-timerange'] = 5_242_880
 
 # The size in bytes for the label name to label values index cache.
-default['prometheus']['flags']['storage.local.index-cache-size.label-name-to-label-values']  = 10485760
+default['prometheus']['flags']['storage.local.index-cache-size.label-name-to-label-values']  = 10_485_760
 
 # The size in bytes for the label pair to fingerprints index cache.
-default['prometheus']['flags']['storage.local.index-cache-size.label-pair-to-fingerprints']  = 20971520
+default['prometheus']['flags']['storage.local.index-cache-size.label-pair-to-fingerprints']  = 20_971_520
 
 # How many chunks to keep in memory. While the size of a chunk is 1kiB, the total
 # memory usage will be significantly higher than this value * 1kiB. Furthermore,
 # for various reasons, more chunks might have to be kept in memory temporarily.
-default['prometheus']['flags']['storage.local.memory-chunks']                             = 1048576
+default['prometheus']['flags']['storage.local.memory-chunks']                             = 1_048_576
 
 # Base path for metrics storage.
 default['prometheus']['flags']['storage.local.path']                                      = '/var/lib/prometheus'
@@ -163,7 +165,7 @@ default['prometheus']['flags']['storage.local.pedantic-checks']                 
 
 # How long to retain samples in the local storage.
 default['prometheus']['flags']['storage.local.retention']                                 = '360h0m0s'
-default['prometheus']['v2_cli_opts']['storage.tsdb.retention.time']                       = '15d'
+default['prometheus']['v2_cli_opts']['storage.tsdb.retention']                            = '15d'
 
 # When to sync series files after modification. Possible values:
 # 'never', 'always', 'adaptive'. Sync'ing slows down storage performance

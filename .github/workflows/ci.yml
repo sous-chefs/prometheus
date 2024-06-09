@@ -6,68 +6,70 @@ name: ci
   push:
     branches:
       - main
-      - master-mb
 
 jobs:
-  delivery:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Run Chef Delivery
-        uses: actionshub/chef-delivery@main
-        env:
-          CHEF_LICENSE: accept-no-persist
-
-  # yamllint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out code
-  #       uses: actions/checkout@v2
-  #     - name: Run yaml Lint
-  #       uses: actionshub/yamllint@main
-
-  mdl:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Run Markdown Lint
-        uses: actionshub/markdownlint@main
+  lint-unit:
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@3.1.1
+    permissions:
+      actions: write
+      checks: write
+      pull-requests: write
+      statuses: write
+      issues: write
 
   integration:
-    needs: [mdl, delivery] # Add back yamllint
+    needs: lint-unit
     runs-on: ubuntu-latest
     strategy:
       matrix:
         os:
-          - amazon-linux
-          - amazonlinux-2
+          - centos-7
+          - centos-stream-8
+          - centos-stream-9
           - debian-9
           - debian-10
-          - centos-7
-          - centos-8
+          - debian-11
+          - debian-12
           - ubuntu-1804
           - ubuntu-2004
         suite:
-          - default
-          - init-binary
+          - alertmanager
+          - default-binary
           - default-source
-          - init
-        include:
-          - os: ubuntu-2004
-            suite: openjdk-pkg-14
-        exclude:
-          - os: amazon-linux
-            suite: openjdk-pkg-11
-          - os: debian-9
-            suite: openjdk-pkg-11
-          - os: debian-10
-            suite: openjdk-pkg-8
+          - init-binary
+          - init-source
       fail-fast: false
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+      - name: Install Chef
+        uses: actionshub/chef-install@3.0.0
+      - name: Dokken
+        uses: actionshub/test-kitchen@3.0.0
+        env:
+          CHEF_LICENSE: accept-no-persist
+          KITCHEN_LOCAL_YAML: kitchen.dokken.yml
+        with:
+          suite: ${{ matrix.suite }}
+          os: ${{ matrix.os }}
+  integration-amazonlinux:
+    needs: lint-unit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - amazonlinux-2023
+        suite:
+          - alertmanager
+          - default-binary
+          - default-source
+          - init-binary
+          - init-source
+      fail-fast: false
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4 # v4
       - name: Install Chef
         uses: actionshub/chef-install@3.0.0
       - name: Dokken

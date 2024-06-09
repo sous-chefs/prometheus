@@ -7,6 +7,8 @@ property :config_file,         String, default: lazy { node['prometheus']['flags
 
 default_action :create
 
+unified_mode true
+
 action :create do
   with_run_context :root do
     edit_resource(:template, new_resource.config_file) do |new_resource|
