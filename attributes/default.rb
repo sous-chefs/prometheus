@@ -32,6 +32,8 @@ when 'rhel', 'fedora'
   else
     default['prometheus']['init_style']                                                   = 'init'
   end
+when 'amazon'
+  default['prometheus']['init_style'] = 'systemd'
 else
   default['prometheus']['init_style'] = 'init'
 end

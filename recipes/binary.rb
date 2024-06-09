@@ -19,7 +19,11 @@
 
 include_recipe 'ark::default'
 
-%w(curl tar bzip2).each do |pkg|
+packages = %w(tar bzip2)
+
+packages.push('curl') unless platform?('amazon')
+
+packages.each do |pkg|
   package pkg
 end
 

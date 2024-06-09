@@ -27,7 +27,8 @@ when 'systemd'
   dist_dir, conf_dir, env_file = value_for_platform_family(
     ['fedora'] => %w(fedora sysconfig prometheus),
     ['rhel'] => %w(redhat sysconfig prometheus),
-    ['debian'] => %w(debian default prometheus)
+    ['debian'] => %w(debian default prometheus),
+    ['amazon'] => %w(amazon default prometheus)
   )
   # rubocop:enable Style/PercentLiteralDelimiters
 
@@ -65,6 +66,10 @@ when 'upstart'
   end
   # rubocop:enable Style/PercentLiteralDelimiters
 else
+
+  package 'chkconfig' do
+    only_if { platform?('amazon') }
+  end
 
   template '/etc/init.d/prometheus' do
     source 'prometheus.erb'
