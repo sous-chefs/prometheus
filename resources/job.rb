@@ -1,3 +1,5 @@
+unified_mode true
+
 property :scrape_interval,     String
 property :scrape_timeout,      String
 property :labels,              Hash
