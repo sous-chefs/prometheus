@@ -22,8 +22,8 @@ platforms:
 suites:
   - name: default
     run_list:
-        - recipe[prometheus::default]
-        - recipe[prometheus::alertmanager]
+      - recipe[prometheus::default]
+      - recipe[prometheus::alertmanager]
     attributes:
       prometheus:
         install_method: 'binary'
@@ -32,7 +32,7 @@ suites:
 
   - name: init-binary
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     attributes:
       prometheus:
         init_style: 'init'
@@ -42,7 +42,7 @@ suites:
 
   - name: default-source
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     attributes:
       go:
         gobin: '/usr/local/go/bin'
@@ -50,10 +50,10 @@ suites:
 
   - name: init
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     provisioner:
-        name: chef_zero
-        require_chef_omnibus: 11.12.4
+      name: chef_zero
+      require_chef_omnibus: 11.12.4
     attributes:
       prometheus:
         init_style: 'init'
