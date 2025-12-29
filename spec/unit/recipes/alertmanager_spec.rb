@@ -13,7 +13,6 @@ describe 'prometheus::alertmanager' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(
       platform: 'ubuntu',
-      version: '16.04',
       file_cache_path: '/tmp/chef/cache'
     ).converge(described_recipe)
   end
@@ -57,7 +56,7 @@ describe 'prometheus::alertmanager' do
 
   context 'source' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
         node.normal['prometheus']['alertmanager']['version'] = '0.14.0'
         node.normal['prometheus']['alertmanager']['install_method'] = 'source'
       end.converge(described_recipe)
@@ -91,7 +90,7 @@ describe 'prometheus::alertmanager' do
 
     context 'runit' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'runit'
         end.converge(described_recipe)
       end
@@ -107,7 +106,7 @@ describe 'prometheus::alertmanager' do
 
     context 'init' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'init'
         end.converge(described_recipe)
       end
@@ -121,7 +120,7 @@ describe 'prometheus::alertmanager' do
       unit_file = '/etc/systemd/system/alertmanager.service'
 
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'systemd'
           node.normal['prometheus']['user'] = 'prom_user'
           node.normal['prometheus']['group'] = 'prom_group'
@@ -152,7 +151,7 @@ describe 'prometheus::alertmanager' do
       job_file = '/etc/init/alertmanager.conf'
 
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'upstart'
           node.normal['prometheus']['user'] = 'prom_user'
           node.normal['prometheus']['group'] = 'prom_group'
@@ -186,7 +185,7 @@ describe 'prometheus::alertmanager' do
 
   context 'binary' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
         node.normal['prometheus']['alertmanager']['version'] = '0.14.0'
         node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
       end.converge(described_recipe)
@@ -214,7 +213,7 @@ describe 'prometheus::alertmanager' do
 
     context 'runit' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'runit'
           node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
@@ -231,7 +230,7 @@ describe 'prometheus::alertmanager' do
 
     context 'init' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'init'
           node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
@@ -244,7 +243,7 @@ describe 'prometheus::alertmanager' do
 
     context 'systemd' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'systemd'
           node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
@@ -256,7 +255,7 @@ describe 'prometheus::alertmanager' do
     end
     context 'upstart' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04', file_cache_path: '/var/chef/cache') do |node|
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', file_cache_path: '/var/chef/cache') do |node|
           node.normal['prometheus']['init_style'] = 'upstart'
           node.normal['prometheus']['alertmanager']['install_method'] = 'binary'
         end.converge(described_recipe)
