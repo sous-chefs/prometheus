@@ -43,7 +43,7 @@ action :install do
 
   case new_resource.install_method
   when 'binary'
-    package %w(curl tar bzip2)
+    package %w(tar bzip2)
 
     ark install_dir_name(new_resource.install_dir) do
       url new_resource.binary_url
@@ -57,7 +57,7 @@ action :install do
       action :put
     end
   when 'shell_binary'
-    package %w(curl tar bzip2)
+    package %w(tar bzip2)
 
     remote_file "#{Chef::Config[:file_cache_path]}/prometheus-#{new_resource.version}.tar.gz" do
       source new_resource.binary_url

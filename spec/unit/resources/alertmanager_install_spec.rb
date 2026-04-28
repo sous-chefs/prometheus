@@ -14,7 +14,7 @@ describe 'prometheus_alertmanager_install' do
   it { is_expected.to create_directory('/opt/prometheus') }
   it { is_expected.to create_directory('/var/log/prometheus') }
   it { is_expected.to create_directory('/opt/prometheus/data') }
-  it { is_expected.to install_package(%w(curl tar bzip2)) }
+  it { is_expected.to install_package(%w(tar bzip2)) }
 
   it 'installs the binary archive with ark' do
     expect(chef_run).to put_ark('prometheus').with(
