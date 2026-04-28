@@ -1,28 +1,20 @@
 require 'bundler/setup'
 require 'cookstyle'
 require 'rubocop/rake_task'
-require 'foodcritic'
 require 'kitchen'
 require 'rspec/core/rake_task'
 
 # Unit Tests. rspec/chefspec
 RSpec::Core::RakeTask.new(:unit)
 
-# Style tests. Rubocop and Foodcritic
+# Style tests.
 namespace :style do
   desc 'Run Ruby style checks'
   RuboCop::RakeTask.new(:ruby)
-
-  desc 'Run Chef style checks'
-  FoodCritic::Rake::LintTask.new(:chef) do |t|
-    t.options = {
-      fail_tags: ['any'],
-    }
-  end
 end
 
 desc 'Run all style checks'
-task style: ['style:chef', 'style:ruby']
+task style: ['style:ruby']
 
 # Integration tests. Kitchen.ci
 namespace :integration do
