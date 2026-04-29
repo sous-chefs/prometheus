@@ -1,9 +1,8 @@
-
 driver:
   name: dokken
   privileged: true # because Docker and SystemD/Upstart
   chef_version: 12.21.31
-  #chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  # chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
 
 transport:
   name: dokken
@@ -24,9 +23,9 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
       - RUN /usr/bin/apt install sudo
-#  - name: debian-7.11
-#    driver:
-#      cache_directory: false
+  # - name: debian-7.11
+  #   driver:
+  #     cache_directory: false
   - name: debian-8.7
     driver:
       image: dokken/debian-8
@@ -41,8 +40,8 @@ platforms:
 suites:
   - name: default
     run_list:
-        - recipe[prometheus::default]
-        - recipe[prometheus::alertmanager]
+      - recipe[prometheus::default]
+      - recipe[prometheus::alertmanager]
     attributes:
       prometheus:
         install_method: 'binary'
@@ -51,7 +50,7 @@ suites:
 
   - name: init-binary
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     attributes:
       prometheus:
         init_style: 'init'
@@ -61,7 +60,7 @@ suites:
 
   - name: default-source
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     attributes:
       go:
         gobin: '/usr/local/go/bin'
@@ -69,10 +68,10 @@ suites:
 
   - name: init
     run_list:
-        - recipe[prometheus::default]
+      - recipe[prometheus::default]
     provisioner:
-        name: chef_zero
-        require_chef_omnibus: 11.12.4
+      name: chef_zero
+      require_chef_omnibus: 11.12.4
     attributes:
       prometheus:
         init_style: 'init'

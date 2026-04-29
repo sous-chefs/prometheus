@@ -1,0 +1,3 @@
+prometheus_alertmanager_install 'alertmanager'
+prometheus_alertmanager_config 'alertmanager'
+prometheus_alertmanager_service 'alertmanager'

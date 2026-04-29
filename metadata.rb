@@ -1,19 +1,23 @@
+# frozen_string_literal: true
+
 name             'prometheus'
-maintainer       'Elijah Wright'
-maintainer_email 'elijah.wright@gmail.com'
+maintainer       'Sous Chefs'
+maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
-description      'Installs/Configures Prometheus'
+description      'Provides custom resources for installing and configuring Prometheus and Alertmanager'
 version          '0.7.6'
-source_url 'https://github.com/elijah/chef-prometheus'
-issues_url 'https://github.com/elijah/chef-prometheus/issues'
-chef_version     '>= 14.0'
+source_url       'https://github.com/sous-chefs/prometheus'
+issues_url       'https://github.com/sous-chefs/prometheus/issues'
+chef_version     '>= 16.0'
 
-%w(ubuntu debian centos redhat fedora).each do |os|
-  supports os
-end
-
-depends 'apt'
-depends 'yum'
-depends 'runit', '>= 1.5'
 depends 'ark'
-depends 'golang'
+
+supports 'almalinux', '>= 8.0'
+supports 'amazon', '>= 2023.0'
+supports 'centos_stream', '>= 9.0'
+supports 'debian', '>= 12.0'
+supports 'fedora'
+supports 'oracle', '>= 8.0'
+supports 'redhat', '>= 8.0'
+supports 'rocky', '>= 8.0'
+supports 'ubuntu', '>= 20.04'
