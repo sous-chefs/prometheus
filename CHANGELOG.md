@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0](https://github.com/sous-chefs/prometheus/compare/v0.7.6...v1.0.0) (2026-04-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate prometheus resources ([#36](https://github.com/sous-chefs/prometheus/issues/36))
+
+### Features
+
+* migrate prometheus resources ([#36](https://github.com/sous-chefs/prometheus/issues/36)) ([6698649](https://github.com/sous-chefs/prometheus/commit/66986492fe0f069bc69474e19423b16e21563c16))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#29](https://github.com/sous-chefs/prometheus/issues/29)) ([b991214](https://github.com/sous-chefs/prometheus/commit/b991214225164d55694966e535478a38e720a8f0))
+
 ## [0.7.6](https://github.com/sous-chefs/prometheus/compare/0.7.5...v0.7.6) (2025-10-16)
 
 
